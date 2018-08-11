@@ -1,6 +1,7 @@
 IMAGE ?= $(shell basename `pwd`)
 TAG ?= latest
 PORT ?= 10000
+REGISTRY ?= quay.io/joerx
 
 help: ## List targets & descriptions
 	@cat Makefile* | grep -E '^[a-zA-Z_-]+:.*?## .*$$' | sort | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m%-30s\033[0m %s\n", $$1, $$2}'
@@ -18,3 +19,7 @@ docker-build: ## Build Docker image
 
 docker-run-server: docker-build ## Build Docker image and run in server mode with defaults
 	docker run -it --rm -p$(PORT):$(PORT) $(IMAGE):$(TAG)
+
+docker-publish: docker-build ## Build Docker image and publish to registry (need to be logged in)
+	docker tag $(IMAGE):$(TAG) $(REGISTRY)/$(IMAGE):$(TAG)
+	docker push $(REGISTRY)/$(IMAGE):$(TAG)

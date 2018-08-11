@@ -40,7 +40,7 @@ func (s *routeGuideServer) loadFeatures(path string) error {
 }
 
 func (s *routeGuideServer) GetFeature(ctx context.Context, point *pb.Point) (*pb.Feature, error) {
-	log.Printf("Incoming call to GetFeatures")
+	log.Printf("Incoming call to GetFeature")
 	for _, f := range s.features {
 		if proto.Equal(f.Location, point) {
 			return f, nil
@@ -50,13 +50,16 @@ func (s *routeGuideServer) GetFeature(ctx context.Context, point *pb.Point) (*pb
 }
 
 func (s *routeGuideServer) ListFeatures(rect *pb.Rectangle, stream pb.RouteGuide_ListFeaturesServer) error {
+	log.Printf("Incoming call to ListFeatures")
 	return fmt.Errorf("Not implemented")
 }
 
 func (s *routeGuideServer) RecordRoute(stream pb.RouteGuide_RecordRouteServer) error {
+	log.Printf("Incoming call to RecordRoute")
 	return fmt.Errorf("Not implemented")
 }
 
 func (s *routeGuideServer) RouteChat(stream pb.RouteGuide_RouteChatServer) error {
+	log.Printf("Incoming call to RouteChat")
 	return fmt.Errorf("Not implemented")
 }

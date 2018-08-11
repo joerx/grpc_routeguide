@@ -22,6 +22,8 @@ func init() {
 
 // Client cmd runs a simple demo client
 func Client() error {
+	fmt.Printf("Connecting to gRPC server on %s\n", clientAddr)
+
 	conn, err := grpc.Dial(clientAddr, grpc.WithInsecure())
 	if err != nil {
 		return err
